@@ -3,6 +3,7 @@
 import CreateNewAlbumModal from "@/components/CreateNewAlbumModal";
 import ImageUploadModal from "@/components/UploadPhotoModal";
 import {useState, useEffect} from "react";
+import InvitePeopleModal from "@/components/modals/invite-people";
 
 export default function ModalProvider() {
     const [isMounted, setIsMounted] = useState(false);
@@ -14,6 +15,7 @@ export default function ModalProvider() {
         <>
             <CreateNewAlbumModal />
             <ImageUploadModal />
+            <InvitePeopleModal />
         </>
     )
 }

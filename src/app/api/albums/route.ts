@@ -1,6 +1,7 @@
 import {db} from "@/lib/db";
 import {NextRequest} from "next/server";
 import {getUser, getUserId} from "@/lib/auth";
+import {v4 as uuidv4} from 'uuid';
 
 export async function POST(req: NextRequest){
     const userId = await getUserId()
@@ -17,11 +18,13 @@ export async function POST(req: NextRequest){
     if (alreadyExists) {
         return new Response("Album already exists", {status: 409});
     }
+    const inviteCode = uuidv4()
     console.log("Creating new album for user", userId);
     const newAlbum = await db.album.create({
         data: {
             name,
-            userId
+            userId,
+            inviteCode,
         }
     })
     return Response.json({

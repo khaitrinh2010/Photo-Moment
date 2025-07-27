@@ -15,13 +15,14 @@ datasource db {
 }
 
 model Album {
-  id        String   @id @default(cuid())
-  name      String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  images Image[] // One album has many images
+  id          String        @id @default(cuid())
+  name        String
+  userId      String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  inviteCode  String?       @unique // Optional invite code for album sharing
+  images      Image[] // One album has many images
+  AlbumInvite AlbumInvite[]
 }
 
 model Image {
@@ -33,4 +34,15 @@ model Image {
   updatedAt DateTime @updatedAt
 
   album Album @relation(fields: [albumId], references: [id], onDelete: Cascade)
+}
+
+model AlbumInvite {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  albumId   String
+  createdAt DateTime  @default(now())
+  expiresAt DateTime? // Optional expiration
+  revoked   Boolean   @default(false)
+  canUpload Boolean   @default(true) // control upload permissions
+  album     Album     @relation(fields: [albumId], references: [id], onDelete: Cascade)
 }

@@ -27,14 +27,14 @@ const CreateNewAlbumModal = () => {
             alert("Album name cannot be empty");
             return;
         }
-        const response  = axios.post("/api/albums", { name: albumName });
+        const response  = await axios.post("/api/albums", { name: albumName });
         if (!response) {
             alert("Failed to create album");
             return;
         }
         setAlbumName(""); // Clear the input field
-        window.location.reload(); // Reload the page to show the new album
         onClose();
+        router.refresh();
     };
 
     return (

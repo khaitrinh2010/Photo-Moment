@@ -13,7 +13,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="flex-1 ml-[80px] px-6 py-6">
                 {/* Header */}
                 <div className="flex justify-end mb-6">
-                    <UserButton afterSignOutUrl="/" />
+                    <UserButton afterSignOutUrl="/sign-in" />
                 </div>
 
                 {/* Page content */}
