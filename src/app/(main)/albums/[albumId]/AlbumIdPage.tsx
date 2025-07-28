@@ -1,12 +1,10 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import {getUser} from "@/lib/auth";
 import {useUser} from "@clerk/nextjs";
 import {Album} from "@prisma/client";
 import AlbumActionsDropdown from "@/components/album/AlbumActionsDropdown";
+import {Button} from "@/components/ui/button";
+import {useModalStore} from "@/hooks/use-modal-store";
 
 //const userId = await getUser().id
 interface AlbumIdPageProps {
@@ -16,10 +14,20 @@ const AlbumIdPage = ({album} : AlbumIdPageProps) => {
     const {user} = useUser()
     const userId = user?.id.trim()
     const images = album.images || [];
+    const {type, data, onOpen, onClose} = useModalStore();
 
     return (
-        <div>
-            <AlbumActionsDropdown album={album} albumUserId={album.userId} currentUserId={userId} />
+        <div className="p-6">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-xl font-semibold">Your Album</h1>
+                <Button
+                    className="bg-emerald-500 hover:bg-emerald-600 text-white"
+                    onClick={() => onOpen("uploadPhoto", { albumId: album.id, userId: userId })} // Open upload modal
+                >
+                    Upload New Photos
+                </Button>
+            </div>
+            <AlbumActionsDropdown album={album} albumUserId={album.userId} currentUserId={userId}/>
             <div className="p-6">
                 {images.length === 0 ? (
                     <p className="text-neutral-400 text-center mt-10">No images in this album.</p>

@@ -11,12 +11,14 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import {useRouter} from "next/navigation";
 
 interface ImageUploadModalProps {
     albumId: string;
 }
 
 export default function ImageUploadModal() {
+    const router =  useRouter()
     const { isOpen, type, onClose, data } = useModalStore();
     const isModalOpen = isOpen && type === "uploadPhoto";
 
@@ -61,6 +63,8 @@ export default function ImageUploadModal() {
             setSelectedFiles([]);
             setPreviews([]);
             onClose();
+            router.refresh()
+
         } catch (err) {
             console.error(err);
             setError("Upload failed. Please try again.");

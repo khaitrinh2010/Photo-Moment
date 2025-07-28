@@ -15,6 +15,7 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import {useOrigin} from "@/hooks/use-origin";
+import {Check} from "lucide-react";
 
 const InvitePeopleModal = () => {
     const { type, isOpen,  data, onClose } = useModalStore();
@@ -26,6 +27,8 @@ const InvitePeopleModal = () => {
     console.log("origin: ", origin)
     const [inviteLink, setInviteLink] = useState("");
     const [loading, setLoading] = useState(false);
+    const [copied, setCopied] = useState(false);
+
     useEffect(() => {
         if (origin && inviteCode) {
             setInviteLink(`${origin}/albums/invite?code=${inviteCode}`);
@@ -47,8 +50,14 @@ const InvitePeopleModal = () => {
     };
 
     const handleCopy = async () => {
+        setLoading(true);
         if (!inviteLink) return;
         await navigator.clipboard.writeText(inviteLink);
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 2000);
+        setLoading(false);
     };
 
 
@@ -63,9 +72,15 @@ const InvitePeopleModal = () => {
                     {inviteLink ? (
                         <div className="flex gap-2">
                             <Input value={inviteLink} className="text-sm" />
-                            <Button variant="secondary" onClick={handleCopy}>
-                                Copy
+                            <Button
+                                disabled={loading}
+                                variant="secondary"
+                                onClick={handleCopy}
+                                className="flex items-center gap-2"
+                            >
+                                {copied ? <Check className="h-4 w-4 text-green-500" /> : "Copy"}
                             </Button>
+
                         </div>
                     ) : (
                         <p className="text-sm text-neutral-500">
@@ -75,8 +90,8 @@ const InvitePeopleModal = () => {
                 </div>
 
                 <DialogFooter className="pt-4">
-                    <Button onClick={handleGenerateNew} disabled={loading} className="w-full">
-                        {loading ? "Generating..." : "Generate New Link"}
+                    <Button onClick={handleGenerateNew} className="w-full">
+                        Generate New Invite Link
                     </Button>
                 </DialogFooter>
             </DialogContent>
