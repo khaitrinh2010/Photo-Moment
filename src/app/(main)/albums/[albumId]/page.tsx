@@ -1,8 +1,13 @@
-import {db} from "@/lib/db";
-import AlbumIdPage from "./AlbumIdPage"; // <-- your client component
+import { db } from "@/lib/db";
+import AlbumIdPage from "./AlbumIdPage";
 import { currentUser } from "@clerk/nextjs/server";
-
-export default async function AlbumPage({ params }: { params: { albumId: string } }) {
+import { type Metadata } from "next";
+// @ts-ignore
+export default async function AlbumPage({
+                                            params,
+                                        }: {
+    params: { albumId: string };
+}) {
     const album = await db.album.findUnique({
         where: { id: params.albumId },
         include: {
@@ -14,9 +19,5 @@ export default async function AlbumPage({ params }: { params: { albumId: string 
         return <div className="p-6">Album not found.</div>;
     }
 
-    return (
-        <AlbumIdPage
-            album={album}
-        />
-    );
+    return <AlbumIdPage album={album} />;
 }
