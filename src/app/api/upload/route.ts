@@ -21,11 +21,11 @@ export async function POST(req: NextRequest) {
     try {
         console.log("Starting upload process at", new Date().toISOString());
         const formData = await req.formData();
-        console.log("Form data received:", {
-            albumId: formData.get("albumId"),
-            userId: formData.get("userId"),
-            images: formData.getAll("images").map((img) => img.name),
-        });
+        // console.log("Form data received:", {
+        //     albumId: formData.get("albumId"),
+        //     userId: formData.get("userId"),
+        //     images: formData.getAll("images").map((img) => img.name),
+        // });
 
         const albumId = formData.get("albumId")?.toString();
         const userId = formData.get("userId")?.toString();

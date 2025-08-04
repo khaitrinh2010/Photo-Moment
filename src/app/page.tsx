@@ -1,15 +1,12 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-import Image from "next/image";
-import {auth} from "@clerk/nextjs/server";
-import {redirect} from "next/navigation";
-import HomePage from "@/app/(main)/homepage/page";
-import HomePageClient from "@/components/HomePageClient";
-import {useAuth} from "@clerk/nextjs";
+export default async function Home() {
+    const { userId } = await auth();
 
-export default function Home() {
-  const {isSignedIn, userId} = auth();
-    if (!isSignedIn) {
+    if (!userId) {
         return redirect("/sign-in");
     }
-    return redirect("/homepage");
+
+    // render your page
 }

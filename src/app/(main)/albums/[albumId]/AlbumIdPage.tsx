@@ -1,19 +1,20 @@
 "use client";
 
 import {useUser} from "@clerk/nextjs";
-import {Album} from "@prisma/client";
+import {Album, Image} from "@prisma/client";
 import AlbumActionsDropdown from "@/components/album/AlbumActionsDropdown";
 import {Button} from "@/components/ui/button";
 import {useModalStore} from "@/hooks/use-modal-store";
 
 //const userId = await getUser().id
 interface AlbumIdPageProps {
-    album: Album
+    album: Album & {images: Image[]}
 }
 const AlbumIdPage = ({album} : AlbumIdPageProps) => {
     const {user} = useUser()
-    const userId = user?.id.trim()
+    const userId : string | undefined = user?.id?.trim()
     const images = album.images || [];
+    console.log("AlbumIdPage images:", images);
     const {type, data, onOpen, onClose} = useModalStore();
 
     return (

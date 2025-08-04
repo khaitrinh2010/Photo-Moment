@@ -1,6 +1,10 @@
 import {NextRequest, NextResponse} from "next/server";
 import {db} from "@/lib/db";
-
+type ImageData = {
+    imageUrl: string;
+    albumId: string;
+    userId: string;
+}
 interface RequestBody {
     images: ImageData[];
 }
