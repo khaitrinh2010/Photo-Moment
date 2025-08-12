@@ -6,4 +6,4 @@ const SignUpScreen = () => {
         <SignUp />
     )
 }
-export default SignUp;
+export default SignUpScreen;

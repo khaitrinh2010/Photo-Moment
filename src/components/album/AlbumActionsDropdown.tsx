@@ -12,8 +12,8 @@ import {Album} from "@prisma/client";
 
 interface AlbumActionsDropdownProps {
     album: Album
-    albumUserId: string;
-    currentUserId: string;
+    albumUserId?: string;
+    currentUserId?: string | undefined;
 }
 
 export default function AlbumActionsDropdown({

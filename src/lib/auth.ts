@@ -11,8 +11,5 @@ export const getUserId = async () => {
     }
     return userId;
 }
-export const getUserById = async (userId: string) => {
-    return await clerkClient.users.getUser(userId);
-};
 
 

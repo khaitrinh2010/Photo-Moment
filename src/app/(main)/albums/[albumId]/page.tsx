@@ -1,15 +1,18 @@
 import { db } from "@/lib/db";
 import AlbumIdPage from "./AlbumIdPage";
 import { currentUser } from "@clerk/nextjs/server";
-import { type Metadata } from "next";
-// @ts-ignore
-export default async function AlbumPage({
-                                            params,
-                                        }: {
-    params: { albumId: string };
-}) {
+
+type PageProps = {
+    params: Promise<{
+        albumId: string;
+    }>;
+};
+
+export default async function AlbumPage({ params }: PageProps) {
+    const { albumId } = await params;
+
     const album = await db.album.findUnique({
-        where: { id: params.albumId },
+        where: { id: albumId },
         include: {
             images: true,
         },

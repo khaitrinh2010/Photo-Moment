@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-type ModalType = "createAlbum" | "createMoment" | "uploadPhoto" | "invite" | "albumSettings" | "renameAlbum" | "deleteAlbum" | "deleteMoment" | null;
+type ModalType = "createAlbum" | "createMoment" | "uploadPhoto" | "invite" | "albumSettings" | "renameAlbum" | "deleteAlbum" | "deleteMoment" | "albumActions" | "momentActions" | null;
 
 interface ModalStore {
     type: ModalType;
