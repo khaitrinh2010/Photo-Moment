@@ -46,3 +46,4 @@ model AlbumInvite {
   canUpload Boolean   @default(true) // control upload permissions
   album     Album     @relation(fields: [albumId], references: [id], onDelete: Cascade)
 }
+
