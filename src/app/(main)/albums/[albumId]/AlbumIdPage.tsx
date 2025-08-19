@@ -1,12 +1,14 @@
 "use client";
 
 import {useUser} from "@clerk/nextjs";
-import {Album, Image} from "@prisma/client";
+import { Image} from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 import AlbumActionsDropdown from "@/components/album/AlbumActionsDropdown";
 import {Button} from "@/components/ui/button";
 import {useModalStore} from "@/hooks/use-modal-store";
 
 //const userId = await getUser().id
+type Album = Prisma.AlbumGetPayload<{}>;
 interface AlbumIdPageProps {
     album: Album & {images: Image[]}
 }

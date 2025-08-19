@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Plus, Folder, MoreVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
-import { Album } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
+
+type Album = Prisma.AlbumGetPayload<{}>;
 
 interface AlbumsPageProps {
     albums: Album[];

@@ -16,6 +16,7 @@ export default function PhotoPickerWeb() {
         }
     };
 
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#1c1c1e] via-[#2c2c2e] to-[#1c1c1e] flex items-center justify-center px-6 py-8 relative overflow-hidden">
             {/* Background Glows */}
